@@ -1,0 +1,33 @@
+body {
+  background-color: #ECEAE0;
+}
+
+.breadcrumb {
+  margin: 8px 8px;
+}
+
+.profile_pic {
+  background-size: 32px 32px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  display: block;
+  margin: -1px;
+  overflow: hidden;
+  position: relative;
+  height: 32px;
+  width: 32px;
+  z-index: 0;
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.login_button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.main_component {
+  height:92.7%;
+  min-height:92.7%;
+}

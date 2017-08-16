@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Neighbourhood Parks</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- CSS Libraries -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- CSS -->
+		<link rel="stylesheet" href="css/uFSWD-P5.css">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<main>
+			<div class="alert alert-danger collapse error_alert" role="alert" > Access to Google MAPS API has failed. Please try after sometime</div>
+			<!-- Off canvas sidebar navigation: Based on this tutorial: https://www.bootstrapzero.com/bootstrap-template/off-canvas-sidebar -->
+			<nav>
+				<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      		   		<div class="container">
+    				  	<div class="navbar-header">
+         	  				<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
+         	    				<span class="glyphicon glyphicon-menu-hamburger"></span>	
+							</button>
+            	    		<a class="navbar-brand" href="#">Neighbourhood Parks</a>
+    			  		</div>
+             	  </div>
+    	    	</div>
+    	    </nav>
+    	    <section>
+            	<div class="row row-offcanvas row-offcanvas-left">
+            		<div class="col-xs-6 col-md-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            			<div class="row">
+	      					<div class="col-xs-12 col-md-11">
+		      					<form class="search-area" data-bind="submit: filterParks">
+		          					<div class="input-group">
+		            					<input type="text" autocomplete="off" class="form-control" placeholder="Search" data-bind="value: searchString,event:{ change: filterParks}">
+		            					<span class="input-group-btn">
+		              						<button class="btn btn-secondary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+		            					</span>
+		          					</div>
+								</form>
+		            			<ul data-bind="foreach: filteredParks" class="list-group">
+		        					<li data-bind="text: name, click: markerClick, attr: { id: place_id }"></li>
+		      					</ul>
+	      					</div>
+      					</div>
+      					<div>
+            				<small>Powered by:</small>
+  							<img width=32 alt="Google Maps" src="http://cdn.embed.ly/providers/logos/googlemaps.png"/>
+  							<img width=32 alt="Foursquare" src="http://icons.veryicon.com/128/Application/Foursquare/Foursquare%201.png"/>
+      					</div>
+            		</div>
+            		<div class="col-xs-12 col-md-9">
+      					<div id="map"></div>
+
+    				</div>
+            	</div>
+            </section
+        </main>
+        <!-- Javascript Libraries -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+		<!-- Javascripts -->
+        <script src="js/uFSWD-P5.js"></script>
+        <!-- Google Maps API -->
+
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB96k-f3x0Aw-U4Ioz1GviW_r96Zm3As5w&callback=gMapsCallback&libraries=places&onerror=gMapsError"></script>
+
+
+	</body>
+</html>

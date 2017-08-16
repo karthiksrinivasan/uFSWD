@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+<div class="container" style="width:65%;padding-top:5%">
+  <style>
+    .page-header {
+      border-bottom: 1px solid #000;
+    }
+  </style>
+  {% if "404" in error %}
+  <div class="page-header">
+    <h1>Not Found</h1>
+  </div>
+  <div class="alert alert-warning">
+    Sorry, but the page you were trying to view does not exist.</div>
+  <p>It looks like this was a result of either:</p>
+  <ul>
+    <li>a mistyped address</li>
+    <li>an out-of-date link</li>
+  </ul>
+
+  {% elif "403" in error %}
+  <div class="page-header">
+    <h1>Forbidden</h1>
+  </div>
+  <div class="alert alert-warning">
+    You dont have permission to visit this page.</div>
+  <p>Please contact the website administrator to obtain permission to visit this page.</p>
+
+  {% elif "500" in error %}
+  <div class="page-header">
+    <h1>Internal Server Error</h1>
+  </div>
+  <div class="alert alert-danger">
+    The server was unable to complete your request.</div>
+  <p>Please contact the website administrator to report this incident with following information</p>
+  <ul>
+    <li>Steps to reproduce the issue if possible.</li>
+    <li>What you were trying do and expected outcome.</li>
+  </ul>
+  {% elif "unauthorized" in error %}
+  <div class="page-header">
+    <h1>Unauthorized</h1>
+    <div class="alert alert-danger">
+      You don't have necessary permissions to performing the action.
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

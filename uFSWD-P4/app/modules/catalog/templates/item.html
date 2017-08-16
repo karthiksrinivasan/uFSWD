@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<div class="col-md-offset-2 col-md-8 container">
+  <div class="row well">
+    <div class="col-md-offset-1 col-md-10">
+      <div class="sidebar-nav panel panel-default" style="height:33%; padding:0px">
+        <div class="panel-heading">
+          <b>{{item.item_name}}</b> {% if current_user.is_authenticated %}
+          <div class="pull-right">
+            <a href="{{url_for('catalog.edit_item',item_id=item.id)}}">
+                <span class="glyphicon glyphicon-edit"></span>
+              </a>
+            <a href="{{url_for('catalog.delete_item',item_id=item.id)}}">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="panel-body" style="overflow:auto;height:80%;">
+          {{item.item_desc}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block content %}
+<div class="col-md-offset-2 col-md-8 container">
+  <div class="row well">
+    <div class="col-md-3">
+      <div class="sidebar-nav panel panel-default" style="height:33%; padding:0px">
+        <div class="panel-heading">
+            <b>Categories</b>
+            {% if current_user.is_authenticated %}
+            <div class="pull-right">
+              <a href="{{url_for('catalog.add_category')}}"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="panel-body" style="overflow:auto;height:80%;">
+          <ul class="nav nav-list">
+            {% for cat in categories %}
+            <li>
+                <a class="navigate_to" href="{{url_for('catalog.category',cat_name=cat)}}">{{cat}}</a>
+            </li>
+            {% endfor %}
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-9">
+      <div class="sidebar-nav panel panel-default" style="height:33%; padding:0px">
+        <div class="panel-heading">
+              <b>{% if category_name %}{{category_name}} Items{% else %}Recent Items{% endif %}</b>
+              {% if current_user.is_authenticated and category_name%}
+              <div class="pull-right">
+                <a href="{{url_for('catalog.add_item',cat_name=category_name)}}">
+                   <span class="glyphicon glyphicon-plus-sign"></span>
+                </a>
+                <a href="{{url_for('catalog.edit_category',cat_name=category_name)}}">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="{{url_for('catalog.delete_category',cat_name=category_name)}}">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </div>
+              {% endif %}
+
+        </div>
+        <div class="panel-body" style="overflow:auto;height:80;">
+          <ul class="nav nav-list">
+            {% for item in items %}
+              <li>
+                <a class="navigate_to" href="{{url_for('catalog.item',item_id=item.id)}}">
+                  {{item.item_name}}{% if not category_name %}({{item.category.category_name}}){% endif %}
+                </a>
+              </li>
+            {% else %}
+            No items in this category.
+            {% endfor %}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

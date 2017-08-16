@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Items Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/catalog.css')}}">
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="">
+          <img alt="Item Catalog" src="{{url_for('static', filename='img/logo.jpeg')}}" width=25/>
+        </a>
+      </div>
+      <ol class="breadcrumb navbar-left">
+        {% for key,crumb in route.items() %} {% if crumb is mapping %} {% if not loop.last and crumb['link'] is defined %}
+
+        <li><a href="{{crumb['link']}}">{{crumb['name']}}</a></li>
+        {% else %}
+        <li class="active">{{crumb['name']}}</li>
+        {% endif %} {% else %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{crumb[0]["parent_name"]}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            {% for minicrumbs in crumb %} {% if minicrumbs["name"] is defined %}
+            <li><a href="{{minicrumbs[" link "]}}">{{minicrumbs["name"]}}</a></li>
+            {% else %}
+            <li role="separator" class="divider"></li>
+            {% endif %} {% endfor %}
+          </ul>
+        </li>
+        {% endif %} {% endfor %}
+      </ol>
+
+      {% if current_user.is_authenticated %}
+      <div class="navbar-right">
+        <span class="profile_pic" style="background-image:url({{current_user.picture}})"></span>
+        <ul class="breadcrumb pull-left">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{current_user.name}}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+
+              <li role="separator" class="divider"></li>
+              <li><a href="{{url_for('users.logout')}}">Logout</a></li>
+
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+      {% else %}
+      <div class="navbar-right">
+        <a class="btn btn-primary btn-sm login_button" href="{{url_for('users.login')}}">Log In</a>
+      </div>
+      {% endif %}
+
+    </div>
+  </nav>
+  </div>
+  <section>
+    <div class="main_component">
+      {% block content %}{% endblock %}
+    </div>
+  </section>
+  <!-- Javascript Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+  <!-- Javascripts -->
+
+</body>
+
+</html>
